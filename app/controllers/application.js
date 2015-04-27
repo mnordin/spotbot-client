@@ -1,4 +1,5 @@
 import Ember from "ember";
+import config from "../config/environment";
 
 export default Ember.Controller.extend({
   query: null,
@@ -55,7 +56,7 @@ export default Ember.Controller.extend({
       var i,j,temparray,chunk = 50;
       for (i=0,j=array.length; i<j; i+=chunk) {
         temparray = array.slice(i,i+chunk);
-        Ember.$.get("https://api.spotify.com/v1/tracks/", {ids: temparray.join(","), market: "se"}).then((data)=> {
+        Ember.$.get("https://api.spotify.com/v1/tracks/", {ids: temparray.join(","), market: config.APP.market}).then((data)=> {
           this.get("playlistTracksData").pushObjects(data.tracks);
         });
       }
